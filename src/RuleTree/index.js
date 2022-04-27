@@ -1,10 +1,10 @@
 import _extends from '@babel/runtime/helpers/extends';
-import _Button from '@alifd/next/es/button';
-import _Select from '@alifd/next/es/select';
-import _Icon from '@alifd/next/es/icon';
+import _Button from './@alifd/next/es/button';
+import _Select from './@alifd/next/es/select';
+import _Icon from './@alifd/next/es/icon';
 import _inheritsLoose from '@babel/runtime/helpers/inheritsLoose';
-import _Balloon from '@alifd/next/es/balloon';
-import _Form from '@alifd/next/es/form';
+import _Balloon from './@alifd/next/es/balloon';
+import _Form from './@alifd/next/es/form';
 import React from 'react';
 import Form, { Field } from 'rc-field-form';
 import { hierarchy } from 'd3-hierarchy';
