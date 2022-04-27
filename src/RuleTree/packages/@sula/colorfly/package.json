@@ -1,0 +1,25 @@
+{
+  "name": "@sula/colorfly",
+  "version": "1.0.2",
+  "description": "colorfly",
+  "scripts": {
+    "build": "node scripts/build",
+    "buildnpm": "salad package build",
+    "buildcss": "lessc style/index.less css/index.css && lessc --clean-css style/index.less css/index.min.css",
+    "watch": "salad package build --watch",
+    "pub": "npm run build && npm run buildnpm && npm run buildcss && npm publish --access public"
+  },
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "jsnext:main": "es/index.js",
+  "author": "sula",
+  "license": "MIT",
+  "dependencies": {
+    "replace-holder": "^1.1.10",
+    "tinycolor2": "^1.4.1"
+  },
+  "devDependencies": {
+    "less": "^3.9.0",
+    "less-plugin-clean-css": "^1.5.1"
+  }
+}

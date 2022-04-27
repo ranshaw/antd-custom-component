@@ -1,0 +1,116 @@
+// position
+.s-pos { position: relative; }
+.s-pos-s { position: static; }
+.s-pos-a { position: absolute; }
+.s-pos-r { position: relative; }
+.s-pos-f { position: fixed; }
+
+.s-t-a { top: auto; }
+.s-t-mini { top: @s-space-mini; }
+.s-t-xs { top: @s-space-xs; }
+.s-t-sm { top: @s-space-sm; }
+.s-t, .s-t-base { top: @s-space-base; }
+.s-t-md { top: @s-space-md; }
+.s-t-lg { top: @s-space-lg; }
+.s-t-xl { top: @s-space-xl; }
+.s-t-xxl { top: @s-space-xxl; }
+.s-t-xxxl { top: @s-space-xxxl; }
+
+.s-r-a { right: auto; }
+.s-r-mini { right: @s-space-mini; }
+.s-r-xs { right: @s-space-xs; }
+.s-r-sm { right: @s-space-sm; }
+.s-r, .s-r-base { right: @s-space-base; }
+.s-r-md { right: @s-space-md; }
+.s-r-lg { right: @s-space-lg; }
+.s-r-xl { right: @s-space-xl; }
+.s-r-xxl { right: @s-space-xxl; }
+.s-r-xxxl { right: @s-space-xxxl; }
+
+.s-b-a { bottom: auto; }
+.s-b-mini { bottom: @s-space-mini; }
+.s-b-xs { bottom: @s-space-xs; }
+.s-b-sm { bottom: @s-space-sm; }
+.s-b, .s-b-base { bottom: @s-space-base; }
+.s-b-md { bottom: @s-space-md; }
+.s-b-lg { bottom: @s-space-lg; }
+.s-b-xl { bottom: @s-space-xl; }
+.s-b-xxl { bottom: @s-space-xxl; }
+.s-b-xxxl { bottom: @s-space-xxxl; }
+
+.s-l-a { left: auto; }
+.s-l-mini { left: @s-space-mini; }
+.s-l-xs { left: @s-space-xs; }
+.s-l-sm { left: @s-space-sm; }
+.s-l, .s-l-base { left: @s-space-base; }
+.s-l-md { left: @s-space-md; }
+.s-l-lg { left: @s-space-lg; }
+.s-l-xl { left: @s-space-xl; }
+.s-l-xxl { left: @s-space-xxl; }
+.s-l-xxxl { left: @s-space-xxxl; }
+
+.s-z-a { z-index: auto; }
+
+// float
+.clearfix() {
+	&:before, &:after { content: " "; display: table; }
+	&:after { clear: both; }
+}
+.clearfix { .clearfix(); }
+
+.s-fl { float: left; }
+.s-fl-n { float: none; }
+.s-fl-l { float: left; }
+.s-fl-r { float: right; }
+
+.s-cl { clear: both; }
+.s-cl-n { clear: none; }
+.s-cl-l { clear: left; }
+.s-cl-r { clear: right; }
+.s-cl-b { clear: both; }
+
+// display
+.s-d { display: block; }
+.s-d-n { display: none; }
+.s-d-b { display: block; }
+.s-d-f { display: flex; }
+.s-d-if { display: inline-flex; }
+.s-d-i { display: inline; }
+.s-d-ib { display: inline-block; }
+.s-d-tb { display: table; }
+.s-d-itb { display: inline-table; }
+
+// visibility
+.s-v { visibility: hidden; }
+.s-v-v { visibility: visible; }
+.s-v-h { visibility: hidden; }
+.s-v-c { visibility: collapse; }
+
+// overflow 
+.s-ov { overflow: hidden; }
+.s-ov-v { overflow: visible; }
+.s-ov-h { overflow: hidden; }
+.s-ov-s { overflow: scroll; }
+.s-ov-a { overflow: auto; }
+
+.s-ovx { overflow-x: hidden; }
+.s-ovx-v { overflow-x: visible; }
+.s-ovx-h { overflow-x: hidden; }
+.s-ovx-s { overflow-x: scroll; }
+.s-ovx-a { overflow-x: auto; }
+
+.s-ovy { overflow-y: hidden; }
+.s-ovy-v { overflow-y: visible; }
+.s-ovy-h { overflow-y: hidden; }
+.s-ovy-s { overflow-y: scroll; }
+.s-ovy-a { overflow-y: auto; }
+
+// cursor
+.s-cur-a { cursor: auto; }
+.s-cur-d { cursor: default; }
+.s-cur-c { cursor: crosshair; }
+.s-cur-ha { cursor: hand; }
+.s-cur-he { cursor: help; }
+.s-cur-m { cursor: move; }
+.s-cur-p { cursor: pointer; }
+.s-cur-t { cursor: text; }

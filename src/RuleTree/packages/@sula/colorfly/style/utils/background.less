@@ -1,0 +1,51 @@
+.bg-color (@color) {
+	@color-dker: "s-@{color}-dker";
+	@color-dk: "s-@{color}-dk";
+	@color-base: "s-@{color}";
+	@color-lt: "s-@{color}-lt";
+	@color-lter: "s-@{color}-lter";
+	.s-bg-@{color} {
+		color: @s-white-primary;
+    background: @@color-base;
+    &.dker { background: @@color-dker; }
+		&.dk { background: @@color-dk; }
+		&.lt { background: @@color-lt; }
+		&.lter { background: @@color-lter; }
+  }
+  .s-bg-@{color}-dker { background: @@color-dker; }
+  .s-bg-@{color}-dk { background: @@color-dk; }
+  .s-bg-@{color} { background: @@color-base; }
+  .s-bg-@{color}-lt { background: @@color-lt; }
+  .s-bg-@{color}-lter { background: @@color-lter; }
+
+	.s-bg-@{color}-important {
+		color: @s-white-primary !important;
+    background: @@color-base !important;
+    &.dker { background: @@color-dker !important; }
+		&.dk { background: @@color-dk !important; }
+		&.lt { background: @@color-lt !important; }
+		&.lter { background: @@color-lter !important; }
+  }
+  
+  .s-bg-@{color}-dker-important { background: @@color-dker !important; }
+  .s-bg-@{color}-dk-important { background: @@color-dk !important; }
+  .s-bg-@{color}-important { background: @@color-base !important; }
+  .s-bg-@{color}-lt-important { background: @@color-lt !important; }
+  .s-bg-@{color}-lter-important { background: @@color-lter !important; }
+}
+
+.bg-color(primary);
+.bg-color(danger);
+.bg-color(success);
+.bg-color(dark);
+.bg-color(info);
+.bg-color(warning);
+.bg-color(light);
+
+.s-bg-light { color: @s-black-primary ; }
+.s-bg-light-important { color: @s-black-primary  !important; }
+
+.s-bg-white { background: #fff; color: @s-black-primary ; }
+.s-bg-white-important { background: #fff !important; }
+.s-bg-black { background: #000; color: @s-black-primary;}
+.s-bg-black-important { background: #000 !important;  }
