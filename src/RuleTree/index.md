@@ -185,68 +185,74 @@ export default () => {
 
 通过 field 的`render`可以快速完成值渲染关联。
 
-```js
-<Playground>
-  {
-    class RuleTreeDemo extends React.Component {
-      constructor(props) {
-        super(props);
+```tsx
+import React from 'react';
+import { RuleTree } from 'antd-custom-component';
+import { Input, Select, Form, Button } from 'antd';
 
-        this.fruitValue = {};
-      }
-      render() {
-        return (
-          <RcFieldForm onFinish={(values) => console.log(values)}>
-            <Field name="ruleTree">
-              <RuleTree
-                fields={[
-                  {
-                    id: 'fruit',
-                    element: (
-                      <Select style={{ width: 150 }} placeholder="请选择">
-                        <Select.Option value="apple">apple</Select.Option>
-                        <Select.Option value="banana">banana</Select.Option>
-                      </Select>
-                    ),
-                  },
-                  {
-                    id: 'amount',
-                    rules: [
-                      {
-                        required: true,
-                        message: '数量不能为空',
-                      },
-                    ],
-                    render: (ctx) => {
-                      const fruitValue = ctx.getValue('fruit');
-                      if (this.fruitValue[ctx.key] && fruitValue !== this.fruitValue[ctx.key]) {
-                        this.fruitValue[ctx.key] = fruitValue;
-                        ctx.setValues('amount', undefined);
-                      } else {
-                        this.fruitValue[ctx.key] = fruitValue;
-                      }
-                      if (fruitValue === 'apple') {
-                        return (
-                          <Select placeholder="请选择" style={{ width: 150 }}>
-                            <Select.Option value="egg">鸡蛋</Select.Option>
-                            <Select.Option value="milk">牛奶</Select.Option>
-                          </Select>
-                        );
-                      } else {
-                        return <Input placeholder="请输入" style={{ width: 150 }} />;
-                      }
-                    },
-                  },
-                ]}
-              />
-            </Field>
-            <button>submit</button>
-          </RcFieldForm>
-        );
-      }
-    }
+class RuleTreeDemo extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.fruitValue = {};
   }
-</Playground>
+
+  render() {
+    return (
+      <Form onFinish={(values) => console.log(values)}>
+        <Form.Item name="ruleTree">
+          <RuleTree
+            fields={[
+              {
+                id: 'fruit',
+                element: (
+                  <Select style={{ width: 150 }} placeholder="请选择">
+                    <Select.Option value="apple">apple</Select.Option>
+                    <Select.Option value="banana">banana</Select.Option>
+                  </Select>
+                ),
+              },
+              {
+                id: 'amount',
+                rules: [
+                  {
+                    required: true,
+                    message: '数量不能为空',
+                  },
+                ],
+                render: (ctx) => {
+                  const fruitValue = ctx.getValue('fruit');
+                  if (this.fruitValue[ctx.key] && fruitValue !== this.fruitValue[ctx.key]) {
+                    this.fruitValue[ctx.key] = fruitValue;
+                    ctx.setValues('amount', undefined);
+                  } else {
+                    this.fruitValue[ctx.key] = fruitValue;
+                  }
+                  if (fruitValue === 'apple') {
+                    return (
+                      <Select placeholder="请选择" style={{ width: 150 }}>
+                        <Select.Option value="egg">鸡蛋</Select.Option>
+                        <Select.Option value="milk">牛奶</Select.Option>
+                      </Select>
+                    );
+                  } else if (fruitValue === 'banana') {
+                    return <Input placeholder="请输入" style={{ width: 150 }} />;
+                  } else {
+                    return <div></div>;
+                  }
+                },
+              },
+            ]}
+          />
+        </Form.Item>
+        <Button type="primary" htmlType="submit">
+          submit
+        </Button>
+      </Form>
+    );
+  }
+}
+export default RuleTreeDemo;
 ```
 
 ### 更新值
