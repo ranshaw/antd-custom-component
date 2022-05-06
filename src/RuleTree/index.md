@@ -82,16 +82,75 @@ export default () => {
 
 ### 基本使用
 
-```js
-<Playground>
-  {
-    class RuleTreeDemo extends React.Component {
-      render() {
-        return (
+```tsx
+import React from 'react';
+import { RuleTree } from 'antd-custom-component';
+import { Input, Select } from 'antd';
+
+class RuleTreeDemo extends React.Component {
+  render() {
+    return (
+      <RuleTree
+        onChange={(changedValues) => {
+          console.log('changedValues: ', changedValues);
+        }}
+        fields={[
+          {
+            id: 'fruit',
+            element: (
+              <Select style={{ width: 150 }} placeholder="请选择">
+                <Select.Option value="apple">apple</Select.Option>
+                <Select.Option value="banana">banana</Select.Option>
+              </Select>
+            ),
+          },
+          {
+            id: 'operation',
+            element: (
+              <Select style={{ width: 150 }} placeholder="请选择">
+                <Select.Option value=">">Greater Than</Select.Option>
+                <Select.Option value="<">Less Than</Select.Option>
+                <Select.Option value="=">Equal</Select.Option>
+              </Select>
+            ),
+          },
+          {
+            id: 'amount',
+            rules: [
+              {
+                required: true,
+                message: '数量不能为空',
+              },
+            ],
+            element: <Input style={{ width: 200 }} placeholder="请输入数量" />,
+          },
+        ]}
+      />
+    );
+  }
+}
+
+export default RuleTreeDemo;
+```
+
+### 值关联
+
+通过`casecades`与`onCascade`可以快速完成值关联操作。
+
+```jsx
+import React from 'react';
+import { RuleTree } from 'antd-custom-component';
+import { Input, Select, Form, Button } from 'antd';
+
+class RuleTreeDemo extends React.Component {
+  onCascade(ctx) {
+    ctx.setValues('amount', 100);
+  }
+  render() {
+    return (
+      <Form onFinish={(values) => console.log(values)}>
+        <Form.Item name="ruleTree">
           <RuleTree
-            onChange={(changedValues) => {
-              console.log('changedValues: ', changedValues);
-            }}
             fields={[
               {
                 id: 'fruit',
@@ -99,16 +158,6 @@ export default () => {
                   <Select style={{ width: 150 }} placeholder="请选择">
                     <Select.Option value="apple">apple</Select.Option>
                     <Select.Option value="banana">banana</Select.Option>
-                  </Select>
-                ),
-              },
-              {
-                id: 'operation',
-                element: (
-                  <Select style={{ width: 150 }} placeholder="请选择">
-                    <Select.Option value=">">Greater Than</Select.Option>
-                    <Select.Option value="<">Less Than</Select.Option>
-                    <Select.Option value="=">Equal</Select.Option>
                   </Select>
                 ),
               },
@@ -123,62 +172,19 @@ export default () => {
                 element: <Input style={{ width: 200 }} placeholder="请输入数量" />,
               },
             ]}
+            cascades={['fruit']}
+            onCascade={this.onCascade.bind(this)}
           />
-        );
-      }
-    }
+        </Form.Item>
+        <Button type="primary" htmlType="submit">
+          submit
+        </Button>
+      </Form>
+    );
   }
-</Playground>
-```
+}
 
-### 值关联
-
-通过`casecades`与`onCascade`可以快速完成值关联操作。
-
-```js
-<Playground>
-  {
-    class RuleTreeDemo extends React.Component {
-      onCascade(ctx) {
-        ctx.setValues('amount', 100);
-      }
-      render() {
-        return (
-          <RcFieldForm onFinish={(values) => console.log(values)}>
-            <Field name="ruleTree">
-              <RuleTree
-                fields={[
-                  {
-                    id: 'fruit',
-                    element: (
-                      <Select style={{ width: 150 }} placeholder="请选择">
-                        <Select.Option value="apple">apple</Select.Option>
-                        <Select.Option value="banana">banana</Select.Option>
-                      </Select>
-                    ),
-                  },
-                  {
-                    id: 'amount',
-                    rules: [
-                      {
-                        required: true,
-                        message: '数量不能为空',
-                      },
-                    ],
-                    element: <Input style={{ width: 200 }} placeholder="请输入数量" />,
-                  },
-                ]}
-                cascades={['fruit']}
-                onCascade={this.onCascade.bind(this)}
-              />
-            </Field>
-            <button>submit</button>
-          </RcFieldForm>
-        );
-      }
-    }
-  }
-</Playground>
+export default RuleTreeDemo;
 ```
 
 ### 渲染关联
@@ -259,184 +265,198 @@ export default RuleTreeDemo;
 
 外部修改 value，需要同时更新`key`。
 
-```js
-<Playground>
-  {() => {
-    const [value, setValue] = React.useState({
-      relation: 'or',
-      children: [
-        {
-          relation: 'and',
-          children: [
-            {
-              fruit: 'apple',
-              amount: 12,
-            },
-            {
-              fruit: 'banana',
-            },
-          ],
-        },
-      ],
-    });
-    const [key, setKey] = React.useState(0);
-    return (
-      <div>
-        <RuleTree
-          key={key}
-          value={value}
-          fields={[
-            {
-              id: 'fruit',
-              element: (
-                <Select style={{ width: 150 }} placeholder="请选择">
-                  <Select.Option value="a">apple</Select.Option>
-                </Select>
-              ),
-            },
-            {
-              id: 'amount',
-              rules: [
-                {
-                  required: true,
-                  message: 'amount is required',
-                },
-              ],
-              element: <Input style={{ width: 200 }} />,
-            },
-          ]}
-        />
-        <br />
-        <button
-          onClick={() => {
-            setValue({
-              relation: 'and',
-              children: [
-                {
-                  relation: 'or',
-                  children: [
-                    {
-                      fruit: 'apple',
-                      amount: 22,
-                    },
-                    {
-                      fruit: 'apple',
-                      amount: 100,
-                    },
-                  ],
-                },
-              ],
-            });
-            setKey(key + 1);
-          }}
-        >
-          update value
-        </button>
-      </div>
-    );
-  }}
-</Playground>
+```jsx
+import React from 'react';
+import { RuleTree } from 'antd-custom-component';
+import { Input, Select, Form, Button } from 'antd';
+
+export default () => {
+  const [value, setValue] = React.useState({
+    relation: 'or',
+    children: [
+      {
+        relation: 'and',
+        children: [
+          {
+            fruit: 'apple',
+            amount: 12,
+          },
+          {
+            fruit: 'banana',
+          },
+        ],
+      },
+    ],
+  });
+  const [key, setKey] = React.useState(0);
+  return (
+    <div>
+      <RuleTree
+        key={key}
+        value={value}
+        fields={[
+          {
+            id: 'fruit',
+            element: (
+              <Select style={{ width: 150 }} placeholder="请选择">
+                <Select.Option value="a">apple</Select.Option>
+              </Select>
+            ),
+          },
+          {
+            id: 'amount',
+            rules: [
+              {
+                required: true,
+                message: 'amount is required',
+              },
+            ],
+            element: <Input style={{ width: 200 }} />,
+          },
+        ]}
+      />
+      <br />
+      <Button
+        onClick={() => {
+          setValue({
+            relation: 'and',
+            children: [
+              {
+                relation: 'or',
+                children: [
+                  {
+                    fruit: 'apple',
+                    amount: 22,
+                  },
+                  {
+                    fruit: 'apple',
+                    amount: 100,
+                  },
+                ],
+              },
+            ],
+          });
+          setKey(key + 1);
+        }}
+      >
+        update value
+      </Button>
+    </div>
+  );
+};
 ```
 
 ### 查看模式
 
-```js
-<Playground>
-  <RuleTree
-    disabled
-    value={{
-      relation: 'or',
-      children: [
-        {
-          relation: 'and',
-          children: [
-            {
-              fruit: 'apple',
-              amount: 12,
-            },
-            {
-              fruit: 'banana',
-            },
-          ],
-        },
-      ],
-    }}
-    fields={[
-      {
-        id: 'fruit',
-        element: (
-          <Select style={{ width: 150 }} placeholder="请选择">
-            <Select.Option value="a">apple</Select.Option>
-          </Select>
-        ),
-      },
-      {
-        id: 'amount',
-        rules: [
+```jsx
+import React from 'react';
+import { RuleTree } from 'antd-custom-component';
+import { Input, Select, Form, Button } from 'antd';
+
+export default () => {
+  return (
+    <RuleTree
+      disabled
+      value={{
+        relation: 'or',
+        children: [
           {
-            required: true,
-            message: 'amount is required',
+            relation: 'and',
+            children: [
+              {
+                fruit: 'apple',
+                amount: 12,
+              },
+              {
+                fruit: 'banana',
+              },
+            ],
           },
         ],
-        element: <Input style={{ width: 200 }} />,
-      },
-    ]}
-  />
-</Playground>
+      }}
+      fields={[
+        {
+          id: 'fruit',
+          element: (
+            <Select style={{ width: 150 }} placeholder="请选择">
+              <Select.Option value="a">apple</Select.Option>
+            </Select>
+          ),
+        },
+        {
+          id: 'amount',
+          rules: [
+            {
+              required: true,
+              message: 'amount is required',
+            },
+          ],
+          element: <Input style={{ width: 200 }} />,
+        },
+      ]}
+    />
+  );
+};
 ```
 
 ### 某层级不可添加
 
 通过 canAddCondition 和 canAddConditionGroup 来控制某一层级是否可以继续添加
 
-```js
-<Playground>
-  <RuleTree
-    canAddCondition={(data) => {
-      if (data.level === 2) {
-        return false;
-      }
-      return true;
-    }}
-    value={{
-      relation: 'or',
-      children: [
-        {
-          relation: 'and',
-          children: [
-            {
-              fruit: 'apple',
-              amount: 12,
-            },
-            {
-              fruit: 'banana',
-            },
-          ],
-        },
-      ],
-    }}
-    fields={[
-      {
-        id: 'fruit',
-        element: (
-          <Select style={{ width: 150 }} placeholder="请选择">
-            <Select.Option value="a">apple</Select.Option>
-          </Select>
-        ),
-      },
-      {
-        id: 'amount',
-        rules: [
+```jsx
+import React from 'react';
+import { RuleTree } from 'antd-custom-component';
+import { Input, Select, Form, Button } from 'antd';
+
+export default () => {
+  return (
+    <RuleTree
+      canAddCondition={(data) => {
+        if (data.level === 2) {
+          return false;
+        }
+        return true;
+      }}
+      value={{
+        relation: 'or',
+        children: [
           {
-            required: true,
-            message: 'amount is required',
+            relation: 'and',
+            children: [
+              {
+                fruit: 'apple',
+                amount: 12,
+              },
+              {
+                fruit: 'banana',
+              },
+            ],
           },
         ],
-        element: <Input style={{ width: 200 }} />,
-      },
-    ]}
-  />
-</Playground>
+      }}
+      fields={[
+        {
+          id: 'fruit',
+          element: (
+            <Select style={{ width: 150 }} placeholder="请选择">
+              <Select.Option value="a">apple</Select.Option>
+            </Select>
+          ),
+        },
+        {
+          id: 'amount',
+          rules: [
+            {
+              required: true,
+              message: 'amount is required',
+            },
+          ],
+          element: <Input style={{ width: 200 }} />,
+        },
+      ]}
+    />
+  );
+};
 ```
 
 ### 与 next-form 结合使用
