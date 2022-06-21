@@ -1,6 +1,5 @@
 import _extends from '@babel/runtime/helpers/extends';
-import _Button from './@alifd/next/es/button';
-import _Select from './@alifd/next/es/select';
+import { Button, Select } from 'antd';
 import _Icon from './@alifd/next/es/icon';
 import _inheritsLoose from '@babel/runtime/helpers/inheritsLoose';
 import _Balloon from './@alifd/next/es/balloon';
@@ -414,7 +413,7 @@ var RuleTree = /*#__PURE__*/ (function (_React$Component) {
           },
           canRootChange
             ? /*#__PURE__*/ React.createElement(
-                _Select,
+                Select,
                 {
                   disabled: !canDrag,
                   style: {
@@ -427,7 +426,7 @@ var RuleTree = /*#__PURE__*/ (function (_React$Component) {
                 },
                 rootRelations.map(function (relation) {
                   return /*#__PURE__*/ React.createElement(
-                    _Select.Option,
+                    Select.Option,
                     {
                       value: relation.value,
                       key: relation.value,
@@ -437,7 +436,7 @@ var RuleTree = /*#__PURE__*/ (function (_React$Component) {
                 }),
               )
             : /*#__PURE__*/ React.createElement(
-                _Button,
+                Button,
                 {
                   style: {
                     width: RELATION_WIDTH,
@@ -501,7 +500,7 @@ var RuleTree = /*#__PURE__*/ (function (_React$Component) {
                   FormItem,
                   null,
                   /*#__PURE__*/ React.createElement(
-                    _Select,
+                    Select,
                     _extends(
                       {
                         disabled: !canDrag,
@@ -514,7 +513,7 @@ var RuleTree = /*#__PURE__*/ (function (_React$Component) {
                     ),
                     relations.map(function (relation) {
                       return /*#__PURE__*/ React.createElement(
-                        _Select.Option,
+                        Select.Option,
                         {
                           value: relation.value,
                           key: relation.value,
