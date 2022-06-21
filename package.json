@@ -1,7 +1,7 @@
 {
   "private": false,
   "name": "antd-custom-component",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "scripts": {
     "start": "dumi dev",
     "docs:build": "dumi build",
@@ -36,11 +36,11 @@
     "moment": "^2.24.0",
     "prop-types": "^15.5.8",
     "rc-field-form": "^1.0.0",
-    "react": "16.13.1",
+    "react": "^16.14.0",
     "react-copy-to-clipboard": "^5.1.0",
     "react-dnd": "^9.3.2",
     "react-dnd-html5-backend": "^9.3.2",
-    "react-dom": "16.13.1",
+    "react-dom": "^16.14.0",
     "react-redux": "^8.0.1",
     "react-transition-group": "^4.4.2",
     "redux": "^4.2.0",
