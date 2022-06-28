@@ -381,7 +381,7 @@ var RuleTree = /*#__PURE__*/ (function (_React$Component) {
     };
   };
 
-  _proto.createFields = function createFields(nodes, canDrag) {
+  _proto.createFields = function createFields(nodes, canDrag, disabledDrag) {
     var _this4 = this;
 
     var _this$props3 = this.props,
@@ -391,7 +391,8 @@ var RuleTree = /*#__PURE__*/ (function (_React$Component) {
       canRootChange = _this$props3.canRootChange;
     var value = this.value;
     var result = [];
-    var DragItem = canDrag ? Drag : UnDrag;
+    var DragItem = canDrag && !disabledDrag ? Drag : UnDrag;
+
     nodes.forEach(function (node, nindex) {
       var data = node.data,
         x = node.x,
@@ -776,6 +777,7 @@ var RuleTree = /*#__PURE__*/ (function (_React$Component) {
       className = _this$props4$classNam === void 0 ? '' : _this$props4$classNam,
       disabled = _this$props4.disabled;
     var canDrag = !disabled;
+    var disabledDrag = _this$props4.disabledDrag;
 
     if (!this.inited && this.props.value) {
       this.inited = true;
@@ -805,7 +807,8 @@ var RuleTree = /*#__PURE__*/ (function (_React$Component) {
 
     var flattenNodes = nodes.descendants();
     var flattenLinks = nodes.links();
-    var fields = this.createFields(flattenNodes, canDrag);
+
+    var fields = this.createFields(flattenNodes, canDrag, disabledDrag);
     var links = this.createLinks(flattenLinks, canDrag);
     return /*#__PURE__*/ React.createElement(
       DndProvider,

@@ -91,6 +91,7 @@ class RuleTreeDemo extends React.Component {
   render() {
     return (
       <RuleTree
+        disabledDrag
         onChange={(changedValues) => {
           console.log('changedValues: ', changedValues);
         }}
